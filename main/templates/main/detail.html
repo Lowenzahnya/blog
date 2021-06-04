@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block content %}
+     <h1>{{ article.title }}</h1>
+         <h2>{{article.task}}</h2>
+
+<hr>
+
+{% if latest_comments %}
+    {% for i in latest_comments %}
+            <strong>{{i.author}}</strong>
+            <p>{{i.comment_text}}</p>
+{% endfor %}
+{% else %}
+Комментариев нет
+{% endif %}
+<hr>
+
+<form action="{% url 'comment' article.id %}" method="POST">
+        {% csrf_token %}
+    <input type="text" required placeholder="Your name" name="name"><br>
+    <textarea name="text" required="" placeholder="Comment text" cols="30" rows="10"></textarea><br>
+    <button type="submit">Отправить</button>
+
+</form>
+{% endblock %}

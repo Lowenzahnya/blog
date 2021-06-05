@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Task
-from blog.main.forms import TaskForm
+from .forms import TaskForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+from datetime import datetime
 
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.order_by('-publication')
     return render(request, 'main/index.html', {'title': 'Главная', 'tasks': tasks})
 
 
@@ -40,8 +41,10 @@ def create(request):
         else:
             error = 'ERROR: Невермая форма'
     form = TaskForm()
+    Task.publication = datetime.now()
     context = {
         'form': form,
-        'error': error
+        'error': error,
+        'publication': Task.publication
     }
     return render(request, 'main/create.html', context)

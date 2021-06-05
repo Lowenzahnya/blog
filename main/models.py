@@ -12,7 +12,7 @@ class Task(models.Model):
         return self.title
 
     def was_recently(self):
-        return self.publication >= timezone.now() - datetime.timedelta(days=7)
+        return self.publication >= timezone.now() - datetime.timedelta(days=30)
 
     class Meta:
         verbose_name = 'Статья'

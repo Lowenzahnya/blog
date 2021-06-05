@@ -1,11 +1,13 @@
-from tskmanager.main.models import Task
+from datetime import datetime
+from .models import Task
 from django.forms import ModelForm, TextInput, Textarea
 
 
 class TaskForm(ModelForm):
     class Meta:
+
         model = Task
-        fields = ['title', 'task']
+        fields = ['title', 'task', 'publication']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'form-control',
@@ -15,4 +17,5 @@ class TaskForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Текст'
             }),
+            'publication': Task.publication
         }

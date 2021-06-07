@@ -3,7 +3,6 @@ from .models import Task
 from .forms import TaskForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
-from datetime import datetime
 
 
 def index(request):
@@ -39,12 +38,10 @@ def create(request):
             form.save()
             return redirect('home')
         else:
-            error = 'ERROR: Невермая форма'
+            error = 'ERROR: Неверная форма'
     form = TaskForm()
-    Task.publication = datetime.now()
     context = {
         'form': form,
-        'error': error,
-        'publication': Task.publication
+        'error': error
     }
     return render(request, 'main/create.html', context)

@@ -3,6 +3,7 @@ from .models import Task
 from .forms import TaskForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+from django.contrib.auth.forms import UserCreationForm
 
 
 def index(request):
@@ -45,3 +46,22 @@ def create(request):
         'error': error
     }
     return render(request, 'main/create.html', context)
+
+
+def registration(request):
+    data = {}
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            data['form'] = form
+            data['res'] = "Успешно"
+            return render(request, 'main/registration.html', data)
+    else:
+        form = UserCreationForm()
+        data['form'] = form
+        return render(request, 'main/registration.html', data)
+
+
+def login(request):
+    pass

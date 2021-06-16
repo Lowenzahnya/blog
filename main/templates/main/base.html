@@ -27,9 +27,11 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Войти</button>
-          <button type="button" class="btn btn-warning">Регистрация</button>
+            <li class="btn btn-outline-light me-2"><a href="{% url 'login' %}"><font color="white">Войти</font></a></li>
+            <li class="btn btn-warning"><a href="{% url 'registration' %}"><font color="black">Регистрация</font></a></li>
+
         </div>
+
       </div>
     </div>
   </header>
